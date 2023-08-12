@@ -2,7 +2,7 @@ const elForm = document.querySelector(".record__form");
 const elTextInput = document.querySelector(".record__text");
 const elTextBtn = document.querySelector(".record__text-btn");
 const elNumberInput = document.querySelector(".record__number");
-const elNumberBtn = document.querySelector(".record__text-btn");
+const elNumberBtn = document.querySelector(".record__number-btn");
 const List = document.querySelector(".record__list");
 const RecRes = document.querySelector(".record__error");
 let array = [
@@ -39,12 +39,11 @@ let Hours = newdata.getHours();
 let Minuts = newdata.getMinutes();
 let rec = new webkitSpeechRecognition();
 rec.onstart = function () {
-    RecRes.textContent = "Gapiring... ";
+    RecRes.textContent = "Gapiring... 🗣️ ";
 };
-
-rec.onend = function () {
-    RecRes.textContent = "Ovozingiz yozb muvafaqiyatli yozb olindi.. ";
-};
+// rec.onend = function () {
+//     RecRes.textContent = "Ovozingiz yozb muvafaqiyatli yozb olindi..✅ ";
+// };
 elTextBtn.addEventListener("click", function (evt) {
     evt.preventDefault();
     rec.start();
@@ -53,20 +52,43 @@ elTextBtn.addEventListener("click", function (evt) {
         elTextInput.value = answer;
     }
 })
+elNumberBtn.addEventListener("click", function (evt) {
+    evt.preventDefault();
+    rec.start();
+    rec.onresult = function (item) {
+        let answer = item.results[0][0].transcript;
+        let clock
+        let minute
+        if(Number(answer) && answer.length==4){
+            clock=answer.slice(0,2)
+            minute=answer.slice(2,4)
+            rec.onend = function () {
+                    RecRes.textContent = "Ovozingiz yozb muvafaqiyatli yozb olindi..✅ ";
+            };
+            
+            elNumberInput.value=`${clock}:${minute}`
+
+        }else{
+            rec.onend = function () {
+                RecRes.textContent = "unaqa vaqtb yo'q ";
+            };
+        }
+    }
+})
+
 
 elForm.addEventListener("submit", function (evt) {
     evt.preventDefault();
     let elTextInputValue = elTextInput.value.trim();
     let elNumberInputValue = elNumberInput.value.trim();
-    let newSecArr={
-        title:elTextInputValue,
-        time:elNumberInputValue,
+    let newSecArr = {
+        title: elTextInputValue,
+        time: elNumberInputValue,
     }
-    array.push(newSecArr) 
-    elTextInput.value=""
-    elNumberInput.value=""
+    array.push(newSecArr)
+    elTextInput.value = ""
+    elNumberInput.value = ""
     // elNumberInputValue.innerHTML="";
-      
     myFunction(array);
 
 });
