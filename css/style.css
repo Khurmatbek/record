@@ -1,0 +1,163 @@
+* {
+    box-sizing: border-box;
+}
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: monospace;
+    margin: 0;
+    background: rgb(10, 6, 140);
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
+.container {
+    max-width: 1440px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 25px;
+}
+
+.record__wrapper {
+    margin-top: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.record__form {
+    max-width: 800px;
+    width: 100%;
+    display: flex;
+    padding: 10px;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items:center;
+    gap: 10px;
+    background-color: rgba(128, 128, 128, 0.277);
+}
+.record__label {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+}
+.record__text {
+    min-width: 250px;
+    max-width: 330px;
+    width: 100%;
+    padding: 20px;
+    outline: none;
+    border-top: 2px solid rgba(0, 0, 255, 0.807);
+    border-left: 2px solid rgba(0, 0, 255, 0.807);
+    border-right: 2px solid rgb(155, 5, 145);
+    border-bottom: 2px solid rgb(155, 5, 145);
+    background-color: rgba(0, 0, 0, 0.347);
+    font-size: 18px;
+    color: white;
+    opacity: 0.6;
+}
+.record__text::placeholder {
+    color: white;
+    letter-spacing: 5px;
+}
+.record__text-btn {
+    padding: 10px;
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background-image: url("https://cdn-icons-png.flaticon.com/512/4480/4480430.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: 50%;
+    background-color: transparent;
+    border: none;
+    top: calc(50% - 9px);
+    left: calc(50% + 102px);
+    outline: none;
+}
+.record__submit{
+    padding: 10px;
+    background-color: rgba(122, 1, 120, 0.681);
+    border: none;
+    border-radius: 20px ;
+    outline: 2px solid blue;
+    color: rgba(255, 255, 255, 0.629);
+}
+.record__number {
+    min-width: 250px;
+    max-width: 330px;
+    width: 100%;
+    padding: 20px;
+    outline: none;
+    border-top: 2px solid rgba(0, 0, 255, 0.807);
+    border-left: 2px solid rgba(0, 0, 255, 0.807);
+    border-right: 2px solid rgb(155, 5, 145);
+    border-bottom: 2px solid rgb(155, 5, 145);
+    background-color: rgba(0, 0, 0, 0.347);
+    font-size: 18px;
+    color: white;
+    opacity: 0.6;
+}
+.record__number-btn {
+    padding: 10px;
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background-image: url("https://cdn-icons-png.flaticon.com/512/4480/4480430.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: 50%;
+    background-color: transparent;
+    border: none;
+    top: calc(50% - 9px);
+    left: calc(50% + 102px);
+    outline: none;
+}
+.record__number::placeholder {
+    color: white;
+    letter-spacing: 5px;
+}
+.record__list {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    column-gap: 20px;
+    padding: 0;
+    padding: 10px;
+    list-style: none;
+    background-color: rgba(128, 128, 128, 0.351);
+}
+.record__item {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    min-width: 250px;
+    max-width: 800px;
+    width: 100%;
+    padding: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.472);
+}
+.record__text-result-box {
+    width: 45%;
+    padding-left: 20px;
+    border-right:4px solid rgb(0, 0, 0);
+    
+}
+.record__text-result {
+    margin: 0;
+    font-size: 20px;
+    color: rgba(210, 210, 210, 0.83);
+}
+.record__num-result-box {
+    width: 55%;
+    padding-left: 20px;
+}
+.record__num-result {
+    margin: 0;
+    font-size: 20px;
+    color: rgba(210, 210, 210, 0.83);
+}
