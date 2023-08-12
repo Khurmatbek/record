@@ -4,6 +4,7 @@ const elTextBtn = document.querySelector(".record__text-btn");
 const elNumberInput = document.querySelector(".record__number");
 const elNumberBtn = document.querySelector(".record__text-btn");
 const List = document.querySelector(".record__list");
+const RecRes = document.querySelector(".record__error");
 let array = [
     {
         title: "Uygonaman",
@@ -32,45 +33,44 @@ const myFunction = function (news) {
     })
 }
 myFunction(array);
-elForm.addEventListener("submit", function (evt) {
-    evt.preventDefault();
-    let elTextInputValue = elTextInput.value.trim();
-    let elNumberInputValue = elNumberInput.value.trim();
-    if (elNumberInputValue != "" && elTextInputValue != "") {
-        let newObj = {
-            title: elTextInputValue,
-            time: elNumberInputValue,
-        }
-    }
-    array.push(newObj);
-    myFunction(array);
-});
 
-
-let rec = new webkitSpeechRecognition();
-rec.onstart = function () {
-    console.log('---BOSHLANDI---');
-};
-rec.error = function () {
-    console.log("----hatolik----")
-}
-rec.onend = function () {
-    console.log('--- TUGADI---');
-};
 let newdata = new Date();
 let Hours = newdata.getHours();
 let Minuts = newdata.getMinutes();
+let rec = new webkitSpeechRecognition();
+rec.onstart = function () {
+    RecRes.textContent = "Gapiring... ";
+};
+
+rec.onend = function () {
+    RecRes.textContent = "Ovozingiz yozb muvafaqiyatli yozb olindi.. ";
+};
 elTextBtn.addEventListener("click", function (evt) {
     evt.preventDefault();
     rec.start();
     rec.onresult = function (item) {
-        const answer = item.results[0][0].transcript;
-        const newAnsver = {
-            title: answer,
-            time: `${Hours} : ${Minuts}`,
-        }
-        array.push(newAnsver);
+        let answer = item.results[0][0].transcript;
+        elTextInput.value = answer;
     }
-    myFunction(array);
 })
+
+elForm.addEventListener("submit", function (evt) {
+    evt.preventDefault();
+    let elTextInputValue = elTextInput.value.trim();
+    let elNumberInputValue = elNumberInput.value.trim();
+    let newSecArr={
+        title:elTextInputValue,
+        time:elNumberInputValue,
+    }
+    array.push(newSecArr) 
+    elTextInput.value=""
+    elNumberInput.value=""
+    // elNumberInputValue.innerHTML="";
+      
+    myFunction(array);
+
+});
+
+
+
 
