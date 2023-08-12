@@ -32,44 +32,45 @@ const myFunction = function (news) {
     })
 }
 myFunction(array);
-// elForm.addEventListener("submit", function (evt) {
-//     evt.preventDefault();
-//     let elTextInputValue = elTextInput.value.trim();
-//     let elNumberInputValue = elNumberInput.value.trim();
-//     if (elNumberInputValue != "" && elTextInputValue != "") {
-//         let newObj = {
-//             title: elTextInputValue,
-//             time: elNumberInputValue,
-//         }
-//         array.push(newObj);
-//     }
-//     myFunction(array);
-// });
+elForm.addEventListener("submit", function (evt) {
+    evt.preventDefault();
+    let elTextInputValue = elTextInput.value.trim();
+    let elNumberInputValue = elNumberInput.value.trim();
+    if (elNumberInputValue != "" && elTextInputValue != "") {
+        let newObj = {
+            title: elTextInputValue,
+            time: elNumberInputValue,
+        }
+    }
+    array.push(newObj);
+    myFunction(array);
+});
+
+
 let rec = new webkitSpeechRecognition();
 rec.onstart = function () {
     console.log('---BOSHLANDI---');
 };
+rec.error = function () {
+    console.log("----hatolik----")
+}
 rec.onend = function () {
     console.log('--- TUGADI---');
 };
-rec.lang = "en";
+let newdata = new Date();
+let Hours = newdata.getHours();
+let Minuts = newdata.getMinutes();
 elTextBtn.addEventListener("click", function (evt) {
     evt.preventDefault();
     rec.start();
-})
-let newdata = new Date();
-let times = newdata.getTime();
-
-rec.onresult = function (item) {
-    let newdata = new Date();
-    let Hours = newdata.getHours()
-    let Minuts=newdata.getMinutes()
-    const answer = item.results[0][0].trnascript;
-    const newAnsver = {
-        title: answer,
-        time:`${Hours} : ${Minuts}` ,
+    rec.onresult = function (item) {
+        const answer = item.results[0][0].transcript;
+        const newAnsver = {
+            title: answer,
+            time: `${Hours} : ${Minuts}`,
+        }
+        array.push(newAnsver);
     }
-    array.push(newAnsver);
-}
-myFunction(array);
+    myFunction(array);
+})
 
