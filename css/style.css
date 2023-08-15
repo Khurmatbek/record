@@ -33,7 +33,7 @@ body {
     padding: 10px;
     flex-wrap: wrap;
     justify-content: space-between;
-    align-items:center;
+    align-items: center;
     gap: 10px;
     background-color: rgba(128, 128, 128, 0.277);
 }
@@ -77,11 +77,11 @@ body {
     left: calc(50% + 102px);
     outline: none;
 }
-.record__submit{
+.record__submit {
     padding: 10px;
     background-color: rgba(122, 1, 120, 0.681);
     border: none;
-    border-radius: 20px ;
+    border-radius: 20px;
     outline: 2px solid blue;
     color: rgba(255, 255, 255, 0.629);
 }
@@ -134,6 +134,7 @@ body {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    justify-content: space-between;
     align-items: center;
     min-width: 250px;
     max-width: 800px;
@@ -142,10 +143,9 @@ body {
     border: 1px solid rgba(0, 0, 0, 0.472);
 }
 .record__text-result-box {
-    width: 45%;
+    /* width: 45%; */
     padding-left: 20px;
-    border-right:4px solid rgb(0, 0, 0);
-    
+    /* border-right:4px solid rgb(0, 0, 0); */
 }
 .record__text-result {
     margin: 0;
@@ -153,11 +153,31 @@ body {
     color: rgba(210, 210, 210, 0.83);
 }
 .record__num-result-box {
-    width: 55%;
+    /* width: 55%; */
     padding-left: 20px;
 }
 .record__num-result {
     margin: 0;
     font-size: 20px;
     color: rgba(210, 210, 210, 0.83);
+}
+.btn-edit {
+    width: 25px;
+    height: 30px;
+    background-image: url("https://cdn.icon-icons.com/icons2/523/PNG/512/edit_icon-icons.com_52382.png");
+    background-size: 30px 30px;
+    background-color: transparent;
+    border-radius: 5px 1px;
+    border: 1px solid white;
+    outline: none;
+}
+.btn-remove {
+    width: 25px;
+    height: 30px;
+    background-image: url("https://cdn-icons-png.flaticon.com/512/6861/6861362.png");
+    background-size: 30px 30px;
+    background-color: transparent;
+    border-radius: 5px 1px;
+    border: 1px solid white;
+    outline: none;
 }

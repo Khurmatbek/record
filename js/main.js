@@ -7,6 +7,7 @@ const List = document.querySelector(".record__list");
 const RecRes = document.querySelector(".record__error");
 let array = [
     {
+        id: 1,
         title: "Uygonaman",
         time: 19,
     }
@@ -23,13 +24,20 @@ const myFunction = function (news) {
         let textresult = document.createElement("pi");
         textresult.classList.add("record__text-result")
         let numberesult = document.createElement("span");
-        numberesult.classList.add("record__num-result")
+        numberesult.classList.add("record__num-result");
+        let btnremove = document.createElement("button");
+        btnremove.classList.add("btn-remove");
+        let btnedit = document.createElement("button");
+        btnedit.classList.add("btn-edit");
+        btnedit.dataset.id = element.id;
+        btnremove.dataset.id = element.id;
         List.appendChild(item);
-        item.append(firstdiv, seconddiv);
+        item.append(firstdiv, seconddiv, btnedit, btnremove);
         firstdiv.appendChild(textresult);
         seconddiv.appendChild(numberesult);
         textresult.textContent = element.title;
         numberesult.textContent = element.time;
+
     })
 }
 myFunction(array);
@@ -41,9 +49,7 @@ let rec = new webkitSpeechRecognition();
 rec.onstart = function () {
     RecRes.textContent = "Gapiring... 🗣️ ";
 };
-// rec.onend = function () {
-//     RecRes.textContent = "Ovozingiz yozb muvafaqiyatli yozb olindi..✅ ";
-// };
+
 elTextBtn.addEventListener("click", function (evt) {
     evt.preventDefault();
     rec.start();
@@ -59,16 +65,16 @@ elNumberBtn.addEventListener("click", function (evt) {
         let answer = item.results[0][0].transcript;
         let clock
         let minute
-        if(Number(answer) && answer.length==4){
-            clock=answer.slice(0,2)
-            minute=answer.slice(2,4)
+        if (Number(answer) && answer.length == 4) {
+            clock = answer.slice(0, 2)
+            minute = answer.slice(2, 4)
             rec.onend = function () {
-                    RecRes.textContent = "Ovozingiz yozb muvafaqiyatli yozb olindi..✅ ";
+                RecRes.textContent = "Ovozingiz yozb muvafaqiyatli yozb olindi..✅ ";
             };
-            
-            elNumberInput.value=`${clock}:${minute}`
 
-        }else{
+            elNumberInput.value = `${clock}:${minute}`
+
+        } else {
             rec.onend = function () {
                 RecRes.textContent = "unaqa vaqtb yo'q ";
             };
@@ -82,6 +88,7 @@ elForm.addEventListener("submit", function (evt) {
     let elTextInputValue = elTextInput.value.trim();
     let elNumberInputValue = elNumberInput.value.trim();
     let newSecArr = {
+        id: array.length ? array.length + 1 : 1,
         title: elTextInputValue,
         time: elNumberInputValue,
     }
@@ -92,7 +99,51 @@ elForm.addEventListener("submit", function (evt) {
     myFunction(array);
 
 });
+elNumberInput.addEventListener("keyup", function (evt) {
+    evt.preventDefault();
+    let str
+    let elNumberInputValue = elNumberInput.value.trim();
+    console.log(elNumberInputValue);
+    if (elNumberInputValue.length == 2) {
+        elNumberInput.value = `${elNumberInputValue}:`
+    }
+    else {
+        elNumberInputValue.value = " "
+    }
+
+});
+List.addEventListener("click", function (evt) {
+    if (evt.target.matches(".btn-remove")) {
+        const deletId = evt.target.dataset.id;
+        const findobj = array.findIndex(item => {
+            return item.id = deletId;
+        });
+        array.splice(findobj, 1);
+        myFunction(array);
+    }
+    if (evt.target.matches(".btn-edit")) {
+        let editText = prompt("edit value");
+        let editTime = prompt("edit time");
+        let editId = evt.target.dataset.id;
+        let finedit = array.find(item => {
+            return item.id = editId;
+        })
+        finedit.title = editText;
+        finedit.time = editTime;
+        myFunction(array);
+
+    }
 
 
+})
+
+
+var myModal = document.getElementById('myModal')
+
+myModal.addEventListener('show.bs.modal', function (event) {
+  if (!data) {
+    return event.preventDefault() // останавливает отображение модального окна
+  }
+})
 
 
